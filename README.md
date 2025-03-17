@@ -26,7 +26,15 @@ function mailto(string $email, string $subject = '', string $content = ''): stri
 In your Twig template, create a `mailto:` link by calling it like this:
 
 ```twig
-<a href="{{ mailto('contact@example.com', 'I need help!', 'Please help me. Thank you!') }}">Email us for help</a>
+<a href="{{ mailto('contact@example.com', 'I need help!', 'Please help me. Thank you!') }}">
+  Email us for help
+</a>
+```
+
+This will generate the following value:
+
+```html
+mailto:contact@example.com?subject=I%20need%20help%21&amp;body=Please%20help%20me.%20Thank%20you%21
 ```
 
 ## Testing
