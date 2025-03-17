@@ -14,7 +14,8 @@ final class MailtoExtensionTest extends TestCase
 
     public function testGettingFunctions(): void
     {
-        $functions = new MailtoExtension()->getFunctions();
+        $extension = new MailtoExtension();
+        $functions = $extension->getFunctions();
 
         $this->assertCount(1, $functions);
         $this->assertInstanceOf(TwigFunction::class, $functions[0]);
