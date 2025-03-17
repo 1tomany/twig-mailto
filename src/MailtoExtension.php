@@ -11,7 +11,7 @@ final class MailtoExtension extends AbstractExtension
     public function __construct()
     {
         if (!extension_loaded('filter')) {
-            // throw new \Exception("The Date Twig extension requires the 'intl' PHP extension.");
+            throw new \RuntimeException('The Twig Mailto extension requires the "filter" PHP extension.');
         }
     }
 
