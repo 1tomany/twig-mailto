@@ -1,10 +1,15 @@
 {
     "name": "1tomany/twig-mailto",
-    "description": "A Twig extension for safely generating mailto: links",
+    "description": "A Twig extension for safely generating mailto links",
     "license": "MIT",
     "type": "library",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "keywords": [
+        "twig",
+        "html",
+        "mailto"
+    ],
     "require": {
         "php": ">=8.1",
         "ext-filter": "*",
@@ -12,6 +17,7 @@
     },
     "require-dev": {
         "php": ">=8.4",
+        "friendsofphp/php-cs-fixer": "^3.75",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^11.5"
     },
@@ -34,9 +40,7 @@
             "email": "vcherubini@gmail.com"
         }
     ],
-    "keywords": [
-        "twig",
-        "html",
-        "mailto"
-    ]
+    "config": {
+        "sort-packages": true
+    }
 }
