@@ -11,7 +11,6 @@ use Twig\TwigFunction;
 #[Group('TwigTests')]
 final class MailtoExtensionTest extends TestCase
 {
-
     public function testGettingFunctions(): void
     {
         $extension = new MailtoExtension();
@@ -36,5 +35,4 @@ final class MailtoExtensionTest extends TestCase
 
         $this->assertStringContainsString('vic@1tomany.com', $extension->generateMailto('VIC@1TOMANY.COM'));
     }
-
 }

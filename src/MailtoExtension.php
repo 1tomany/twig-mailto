@@ -5,12 +5,21 @@ namespace OneToMany\Twig;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
+use function count;
+use function extension_loaded;
+use function filter_var;
+use function http_build_query;
+use function strtolower;
+use function trim;
+
+use const FILTER_VALIDATE_EMAIL;
+use const PHP_QUERY_RFC3986;
+
 final class MailtoExtension extends AbstractExtension
 {
-
     public function __construct()
     {
-        if (!\extension_loaded('filter')) {
+        if (!extension_loaded('filter')) {
             throw new \RuntimeException('The Twig Mailto extension requires the "filter" PHP extension.');
         }
     }
@@ -29,29 +38,27 @@ final class MailtoExtension extends AbstractExtension
         string $email,
         ?string $subject = null,
         ?string $content = null,
-    ): string
-    {
-        $email = \strtolower(\trim($email));
+    ): string {
+        $email = strtolower(trim($email));
 
-        if (false === \filter_var($email, \FILTER_VALIDATE_EMAIL)) {
+        if (false === filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new \InvalidArgumentException(\sprintf('The email address "%s" is invalid.', $email));
         }
 
         $query = [];
 
-        if ($subject = \trim($subject ?? '')) {
+        if ($subject = trim($subject ?? '')) {
             $query['subject'] = $subject;
         }
 
-        if ($content = \trim($content ?? '')) {
+        if ($content = trim($content ?? '')) {
             $query['body'] = $content;
         }
 
-        if (0 === \count($query)) {
+        if (0 === count($query)) {
             return sprintf('mailto:%s', $email);
         }
 
-        return \sprintf('mailto:%s?%s', $email, \http_build_query($query, '', null, \PHP_QUERY_RFC3986));
+        return \sprintf('mailto:%s?%s', $email, http_build_query($query, '', null, PHP_QUERY_RFC3986));
     }
-
 }
